@@ -21,26 +21,35 @@ void split(Node*& in, Node*& odds, Node*& evens)
   //already sorted
 
   //check if in is nullptr
-  //check if odds is nullptr
-  //check if evens is nullptr
   //else add first value into either odds and even
   //unlink the node and attribute it to its respective list
+  //add test case about if in has only one linked node
 
-
-  Node* temp = new Node;
-  temp->val = in->val;
-  temp->next = in->next;
+  Node* temp = in;
 
   if (in == nullptr){
     return;
-  }else if(temp->val % 2 == 1 && odds == nullptr){
-    odds->val = temp->val;
-    odds->next = nullptr;
-    //unlink the node from the original list
-    temp->next = 
+  }else if(in->value % 2 == 1 && odds == nullptr){
+    in = temp->next;
+    temp->next = odds;
+    odds = temp;
+    split(in, odds, evens);
+  }else if(in->value % 2 == 0 && evens == nullptr){
+    in = temp->next;
+    temp->next = evens;
+    evens = temp;
+    split(in, odds, evens);
+  }else if(in->value % 2 == 1){
+    in = temp->next;
+    temp->next = odds;
+    odds = temp;
+    split(in, odds, evens);
+  }else if(in->value % 2 == 0){
+    in = temp->next;
+    temp->next = evens;
+    evens = temp;
+    split(in, odds, evens);
   }
-
-
 }
 
 /* If you needed a helper function, write it here */
