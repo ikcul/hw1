@@ -41,16 +41,16 @@ void split(Node*& in, Node*& odds, Node*& evens)
     evens = temp;
     split(in, odds, evens);
   }else if(in->value % 2 == 1){
-    in = temp->next;
+    // in = temp->next;
     // temp->next = odds;
     // odds = temp;
-    appendingToFront(odds, temp);
+    appendingToFront(odds, in);
     split(in, odds, evens);
   }else if(in->value % 2 == 0){
-    in = temp->next;
+    // in = temp->next;
     // temp->next = evens;
     // evens = temp;
-    appendingToFront(evens, temp);
+    appendingToFront(evens, in);
     split(in, odds, evens);
   }
 }
@@ -59,6 +59,7 @@ void split(Node*& in, Node*& odds, Node*& evens)
 
 void appendingToFront(Node*& list, Node* node){
   if (list == nullptr){
+    node->next = nullptr;
     list = node;
   }else {
     appendingToFront(list->next, node);
