@@ -13,7 +13,7 @@ the function below should be the only one in this file.
 #include "split.h"
 
 /* Add a prototype for a helper function here if you need */
-void appendingToFront(Node*& list, Node* node);
+void appendingToEnd(Node*& list, Node* node);
 
 void split(Node*& in, Node*& odds, Node*& evens)
 {
@@ -41,27 +41,27 @@ void split(Node*& in, Node*& odds, Node*& evens)
     evens = temp;
     split(in, odds, evens);
   }else if(in->value % 2 == 1){
-    // in = temp->next;
+    in = temp->next;
     // temp->next = odds;
     // odds = temp;
-    appendingToFront(odds, in);
+    appendingToEnd(odds, temp);
     split(in, odds, evens);
   }else if(in->value % 2 == 0){
-    // in = temp->next;
+    in = temp->next;
     // temp->next = evens;
     // evens = temp;
-    appendingToFront(evens, in);
+    appendingToEnd(evens, temp);
     split(in, odds, evens);
   }
 }
 
 /* If you needed a helper function, write it here */
 
-void appendingToFront(Node*& list, Node* node){
-  if (list == nullptr){
+void appendingToEnd(Node*& list, Node* node){
+  if (list->next == nullptr){
+    list->next = node;
     node->next = nullptr;
-    list = node;
   }else {
-    appendingToFront(list->next, node);
+    appendingToEnd(list->next, node);
   }
 }
